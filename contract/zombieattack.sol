@@ -17,8 +17,7 @@ contract ZombieBattle is ZombieHelper {
             ) % _modulus;
     }
 
-    function attack(uint256 _zombieId, uint256 _targetZombieId) external {
-        require(msg.sender == zombieToOwner[_zombieId]);
+    function attack(uint256 _zombieId, uint256 _targetZombieId) external ownerOf(_zombieId) {
         Zombie storage myZombie = zombies[_zombieId];
         Zombie storage targetZombie = zombies[_targetZombieId];
         uint256 rand = randMod(100);
