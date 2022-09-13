@@ -39,4 +39,12 @@ contract ZombieAttack is ZombieHelper {
         }
         _triggerCooldown(myZombie);
     }
+
+    function testAccessContract() public pure returns (string memory) {
+        return "test success!! Hello local zombie app!!";
+    }
+
+    function testShowZombieList() public view returns (Zombie[] memory) {
+        return zombies;
+    }
 }
