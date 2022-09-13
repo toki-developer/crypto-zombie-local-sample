@@ -58,4 +58,40 @@ contract ZombieHelper is ZombieFeeding {
         }
         return result;
     }
+
+    struct ZombieDetail {
+        string name;
+        uint256 dna;
+        uint32 level;
+        uint256 readyTime;
+        uint16 winCount;
+        uint16 loseCount;
+        uint256 id;
+    }
+
+    function getZombiesDetailByOwner(address _owner)
+        external
+        view
+        returns (ZombieDetail[] memory)
+    {
+        ZombieDetail[] memory result = new ZombieDetail[](
+            ownerZombieCount[_owner]
+        );
+        uint256 counter = 0;
+        for (uint256 i = 0; i < zombies.length; i++) {
+            if (zombieToOwner[i] == _owner) {
+                result[counter] = ZombieDetail(
+                    zombies[i].name,
+                    zombies[i].dna,
+                    zombies[i].level,
+                    zombies[i].readyTime,
+                    zombies[i].winCount,
+                    zombies[i].loseCount,
+                    i
+                );
+                counter = counter.add(1);
+            }
+        }
+        return result;
+    }
 }
